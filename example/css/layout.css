@@ -1,0 +1,31 @@
+#controls
+{
+	float: left;
+	background: #333;
+}
+
+.sub-control
+{
+	background: #dedede;
+	padding: 10px;
+}
+
+.slider
+{
+	background: #333;
+	width:200px;
+	margin:2px;
+	padding:2px;
+}
+
+.slider .knob
+{
+	width: 20px;
+	height:20px;
+	background: #fff;
+}
+
+.text
+{
+	color: #fff;
+}

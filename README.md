@@ -1,7 +1,16 @@
-super-rainbow-gen
-=================
+## About
+Super Rainbow Canvas makes ridiculous gradient / rainbow patterns in canvas using sine waves and the Moo-Tools library.
 
-I'm not sure how to explain this...
+## Requires
+Moo-Tools Core - 1.5.4
+Moo-Tools More - Slider - 1.4.0
 
-This script generates a canvas, onto which you can control rainbow esque patterns.
-Uses dynamic colours based on sine-wave generation
+## Usage
+Include the script as normal
+    <script type="text/javascript" src="../src/SuperRainbowCanvas.js"></script>
+
+To initiate the script
+	window.addEvent('domready', function()
+	{
+		new SuperRainbowCanvas();
+	});
