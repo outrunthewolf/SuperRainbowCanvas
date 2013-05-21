@@ -7,14 +7,14 @@ Super Rainbow Canvas makes ridiculous gradient / rainbow patterns in canvas usin
 
 ## Usage
 Include the script as normal
-'''html
+```html
     <script type="text/javascript" src="../src/SuperRainbowCanvas.js"></script>
-'''
+```
 
 To initiate the script
-'''javascript
+```javascript
 	window.addEvent('domready', function()
 	{
 		new SuperRainbowCanvas();
 	});
-'''
+```
