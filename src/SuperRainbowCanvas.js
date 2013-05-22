@@ -13,20 +13,29 @@ var SuperRainbowCanvas = new Class
 		},
 		styles:
 		{
+			canvas:
+			{
+				height: '100%',
+				width: '100%',
+				position: 'absolute',
+				top: '0px',
+				left: '0px',
+				zIndex: '-1'
+			},
 			box: 
 			{
-				'float': 'left',
-				background: '#333'
+				'float': 'left'
 			},
 			subControl: 
 			{
-				background: '#dedede',
+				background: 'rgba(51,51,51,0.8)',
 				padding: '10px'
 			},
 			slider: 
 			{
 				background: '#333',
 				width: '200px',
+				height: '20px',
 				margin: '2px',
 				padding: '2px;'
 			},
@@ -47,51 +56,47 @@ var SuperRainbowCanvas = new Class
 	{
         this.setOptions(options);
 
+        // validate some options
 		if(!this.options.container)
 			this.options.container = document.body;
+
+		// It won't drop lower than one my dear
+		if(this.options.size.min < 1)
+			this.options.size.min = 1;
 
         this.setControlRange(this.options);
         this.buildCanvas(this.options.container);
         this.buildControls(this.options);
-
-        
     },
 
     buildCanvas: function(container)
     {
 		this.canvas = new Element('canvas', {
 			id: 'SuperRainbowCanvas',
-			styles: {
-				height: '100%',
-				width: '100%',
-				position: 'absolute',
-				top: '0px',
-				left: '0px',
-				zIndex: '-1'
-			}
+			styles: this.options.styles.canvas
 		}).inject(container);
     },
 
-    setControlRange: function(controls)
+    setControlRange: function(options)
     {
     	this.controls = 
     	{
 	    	mainControls: 
 			{ 
-				size: { range: { min: controls.size.min, max: 21 }}, 
-				phase: { range: { min: controls.size.min, max: controls.size.max }}
+				size: { range: { min: options.size.min, max: 21 }}, 
+				phase: { range: { min: options.size.min, max: options.size.max }}
 			}, 
 			phaseControls: 
 			{ 
-				red: {range: { min: controls.size.min, max: controls.size.max }}, 
-				green: {range: { min: controls.size.min, max: controls.size.max }}, 
-				blue: {range: { min: controls.size.min, max: controls.size.max }}
+				red: {range: { min: options.size.min, max: options.size.max }}, 
+				green: {range: { min: options.size.min, max: options.size.max }}, 
+				blue: {range: { min: options.size.min, max: options.size.max }}
 			},
 			freqControls: 
 			{ 
-				'red-frequency': {range: { min: controls.size.min, max: controls.size.max }}, 
-				'green-frequency': {range: { min: controls.size.min, max: controls.size.max }}, 
-				'blue-frequency': {range: { min: controls.size.min, max: controls.size.max }}
+				'red-frequency': {range: { min: options.size.min, max: options.size.max }}, 
+				'green-frequency': {range: { min: options.size.min, max: options.size.max }}, 
+				'blue-frequency': {range: { min: options.size.min, max: options.size.max }}
 			}
 		}
     },
@@ -102,7 +107,6 @@ var SuperRainbowCanvas = new Class
 		var wrapper = new Element('section#wrapper').inject(options.container);
 		var control = new Element('div#control', { styles: options.styles.box }).inject(wrapper);
 		var i = 0;
-		
 
     	// loop through main controls and apppend each child to stage
 		Object.each(this.controls, function(v, k) 
@@ -122,7 +126,7 @@ var SuperRainbowCanvas = new Class
 				{ 
 					id: k, 
 					'class': 'slider', 
-					html: '<div class="knob"></div><span style="color: #fff">' + k + '</span><div class="text" style="color: #fff;"></div>', 
+					html: '<div class="knob"></div>', 
 					styles: options.styles.slider
 				});
 				$$('.sub-control')[i].adopt(el);
@@ -140,7 +144,7 @@ var SuperRainbowCanvas = new Class
 					wheel: true,
 					onChange: function() {
 						options.settings[k] = this.step;
-						a.getElement('.text').set('html', (this.step));
+						//a.getElement('.text').set('html', (this.step));
 						self.loadScene();
 					}
 				});

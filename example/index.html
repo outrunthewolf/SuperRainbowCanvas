@@ -15,7 +15,33 @@
 <script type="text/javascript">
 	window.addEvent('domready', function()
 	{
-		new SuperRainbowCanvas();
+		new SuperRainbowCanvas({
+			container: $('holder'),
+			size: 
+			{
+	    		min: 1,
+	    		max: 200
+			},
+			styles:
+			{
+				box: 
+				{
+
+				},
+				subControl: 
+				{
+
+				},
+				slider: 
+				{
+
+				},
+				knob: 
+				{
+
+				}
+			}
+		});
 	});
 </script>
 
